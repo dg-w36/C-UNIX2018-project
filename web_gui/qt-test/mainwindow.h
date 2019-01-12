@@ -30,6 +30,7 @@ public:
 
 public slots :
     void update_img();
+    int socket_connect();
 
 private:
     Ui::MainWindow *ui;

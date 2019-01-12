@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     pofd.fd = start_socket();
     pofd.events = POLLIN;
 
-    if(fork() == 0) { // subprocess 1
+    if(fork() == 0) { // subprocess 1 to recv image and cache it
         Mat recv_mat(800, 1920, CV_8UC3);
         int len,total;
 
@@ -47,26 +47,31 @@ int main(int argc, char *argv[])
                 memcpy(&v_buffer[((*index_buffer)%3)*(COL*ROW*PIXEL_SIZE)], recv_mat.data, COL*ROW*PIXEL_SIZE);
                 (*index_buffer)++;
 
-                qDebug("recv ok\n");
+//                qDebug("recv ok\n");
             }
        }
     }
 
     int index = (*index_buffer) == 0 ? (*index_buffer):(*index_buffer)-1;
-    Mat output_img(400,960, CV_8UC3);
     Mat tmp_img(800,1920, CV_8UC3);
-
     uchar * out = (uchar *)mmap(NULL, 400*960*3, PROT_READ|PROT_WRITE,MAP_SHARED|MAP_ANONYMOUS,-1,0);
+
+
     w.set_Qimage_buffer(out);
 
+    // timer for image update
     QTimer socket_timer;
     QObject::connect(&socket_timer, SIGNAL(timeout()), &w, SLOT(update_img()));
     socket_timer.start(30);
 
+    // sub process 2 for do image process
+    // if the buffer index change, process 2 start
     if(fork() == 0) {
+        Mat output_img(400,960, CV_8UC3);
         while(1) {
             if(*index_buffer > index) {
-                memcpy(tmp_img.data, &v_buffer[(index%3)*(COL*ROW*PIXEL_SIZE)], COL*ROW*PIXEL_SIZE);
+//                memcpy(tmp_img.data, &v_buffer[(index%3)*(COL*ROW*PIXEL_SIZE)], COL*ROW*PIXEL_SIZE);
+                tmp_img.data = &v_buffer[(index%3)*(COL*ROW*PIXEL_SIZE)];
                 resize(tmp_img, output_img, output_img.size());
                 cvtColor(output_img, output_img, CV_RGB2BGR);
 

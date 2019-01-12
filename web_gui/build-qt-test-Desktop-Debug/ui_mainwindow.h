@@ -30,10 +30,10 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QGraphicsView *image;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton_3;
-    QPlainTextEdit *plainTextEdit;
+    QPushButton *connect_socket;
+    QPushButton *do_process;
+    QPushButton *record;
+    QPlainTextEdit *server_ip;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -42,28 +42,28 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1113, 541);
+        MainWindow->resize(1083, 565);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         image = new QGraphicsView(centralWidget);
         image->setObjectName(QStringLiteral("image"));
         image->setGeometry(QRect(20, 10, 980, 420));
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(190, 440, 89, 25));
-        pushButton_2 = new QPushButton(centralWidget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(300, 440, 89, 25));
-        pushButton_3 = new QPushButton(centralWidget);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-        pushButton_3->setGeometry(QRect(410, 440, 89, 25));
-        plainTextEdit = new QPlainTextEdit(centralWidget);
-        plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
-        plainTextEdit->setGeometry(QRect(20, 440, 141, 31));
+        connect_socket = new QPushButton(centralWidget);
+        connect_socket->setObjectName(QStringLiteral("connect_socket"));
+        connect_socket->setGeometry(QRect(170, 440, 91, 31));
+        do_process = new QPushButton(centralWidget);
+        do_process->setObjectName(QStringLiteral("do_process"));
+        do_process->setGeometry(QRect(280, 440, 111, 31));
+        record = new QPushButton(centralWidget);
+        record->setObjectName(QStringLiteral("record"));
+        record->setGeometry(QRect(410, 440, 101, 31));
+        server_ip = new QPlainTextEdit(centralWidget);
+        server_ip->setObjectName(QStringLiteral("server_ip"));
+        server_ip->setGeometry(QRect(20, 440, 141, 31));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1113, 22));
+        menuBar->setGeometry(QRect(0, 0, 1083, 22));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -80,10 +80,10 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("MainWindow", "PushButton", Q_NULLPTR));
-        pushButton_2->setText(QApplication::translate("MainWindow", "PushButton", Q_NULLPTR));
-        pushButton_3->setText(QApplication::translate("MainWindow", "PushButton", Q_NULLPTR));
-        plainTextEdit->setPlainText(QApplication::translate("MainWindow", "server ip", Q_NULLPTR));
+        connect_socket->setText(QApplication::translate("MainWindow", "connect", Q_NULLPTR));
+        do_process->setText(QApplication::translate("MainWindow", "Change to gray", Q_NULLPTR));
+        record->setText(QApplication::translate("MainWindow", "start_record", Q_NULLPTR));
+        server_ip->setPlainText(QApplication::translate("MainWindow", "127.0.0.1", Q_NULLPTR));
     } // retranslateUi
 
 };
