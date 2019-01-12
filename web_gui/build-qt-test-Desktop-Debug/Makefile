@@ -38,7 +38,7 @@ DISTNAME      = qt-test1.0.0
 DISTDIR = /home/david/Documents/learn/PHD_course/2018-2019-year1/C-UNIX/homework/C-UNIX2018-project/web_gui/build-qt-test-Desktop-Debug/.tmp/qt-test1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/david/anaconda3/lib
-LIBS          = $(SUBLIBS) -L/usr/lib/ -lopencv_core -lopencv_highgui -L/home/david/anaconda3/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/usr/lib/ -lopencv_core -lopencv_highgui -lopencv_imgproc -L/home/david/anaconda3/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -766,6 +766,10 @@ moc_mainwindow.cpp: /home/david/anaconda3/include/qt/QtWidgets/QMainWindow \
 		/home/david/anaconda3/include/qt/QtGui/qtouchdevice.h \
 		/home/david/anaconda3/include/qt/QtWidgets/qtabwidget.h \
 		/home/david/anaconda3/include/qt/QtGui/qicon.h \
+		/home/david/anaconda3/include/qt/QtCore/QTimer \
+		/home/david/anaconda3/include/qt/QtCore/qtimer.h \
+		/home/david/anaconda3/include/qt/QtCore/qbasictimer.h \
+		/home/david/anaconda3/include/qt/QtCore/QObject \
 		../qt-test/mainwindow.h \
 		moc_predefs.h \
 		/home/david/anaconda3/bin/moc
@@ -894,6 +898,10 @@ main.o: ../qt-test/main.cpp ../qt-test/mainwindow.h \
 		/home/david/anaconda3/include/qt/QtGui/qtouchdevice.h \
 		/home/david/anaconda3/include/qt/QtWidgets/qtabwidget.h \
 		/home/david/anaconda3/include/qt/QtGui/qicon.h \
+		/home/david/anaconda3/include/qt/QtCore/QTimer \
+		/home/david/anaconda3/include/qt/QtCore/qtimer.h \
+		/home/david/anaconda3/include/qt/QtCore/qbasictimer.h \
+		/home/david/anaconda3/include/qt/QtCore/QObject \
 		/home/david/anaconda3/include/qt/QtWidgets/QApplication \
 		/home/david/anaconda3/include/qt/QtWidgets/qapplication.h \
 		/home/david/anaconda3/include/qt/QtCore/qcoreapplication.h \
@@ -1007,6 +1015,10 @@ mainwindow.o: ../qt-test/mainwindow.cpp ../qt-test/mainwindow.h \
 		/home/david/anaconda3/include/qt/QtGui/qtouchdevice.h \
 		/home/david/anaconda3/include/qt/QtWidgets/qtabwidget.h \
 		/home/david/anaconda3/include/qt/QtGui/qicon.h \
+		/home/david/anaconda3/include/qt/QtCore/QTimer \
+		/home/david/anaconda3/include/qt/QtCore/qtimer.h \
+		/home/david/anaconda3/include/qt/QtCore/qbasictimer.h \
+		/home/david/anaconda3/include/qt/QtCore/QObject \
 		ui_mainwindow.h \
 		/home/david/anaconda3/include/qt/QtCore/QVariant \
 		/home/david/anaconda3/include/qt/QtWidgets/QAction \

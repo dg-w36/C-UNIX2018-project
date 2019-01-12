@@ -26,7 +26,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 INCLUDEPATH += /usr/include/opencv
 
-LIBS += -L/usr/lib/ -lopencv_core -lopencv_highgui
+LIBS += -L/usr/lib/ -lopencv_core -lopencv_highgui -lopencv_imgproc
 
 SOURCES += \
         main.cpp \

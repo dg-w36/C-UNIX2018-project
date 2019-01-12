@@ -42,7 +42,7 @@ int main(){
                 printf("Video file is no frame\n");
                 break;
             }
-            usleep(16667);
+            usleep(33333); //30fps
         }   
 
         // printf("image element size is %lu\n", frame.elemSize());

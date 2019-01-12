@@ -42,28 +42,28 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(674, 404);
+        MainWindow->resize(1113, 541);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         image = new QGraphicsView(centralWidget);
         image->setObjectName(QStringLiteral("image"));
-        image->setGeometry(QRect(20, 10, 480, 200));
+        image->setGeometry(QRect(20, 10, 980, 420));
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(20, 300, 89, 25));
+        pushButton->setGeometry(QRect(190, 440, 89, 25));
         pushButton_2 = new QPushButton(centralWidget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(130, 300, 89, 25));
+        pushButton_2->setGeometry(QRect(300, 440, 89, 25));
         pushButton_3 = new QPushButton(centralWidget);
         pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-        pushButton_3->setGeometry(QRect(240, 300, 89, 25));
+        pushButton_3->setGeometry(QRect(410, 440, 89, 25));
         plainTextEdit = new QPlainTextEdit(centralWidget);
         plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
-        plainTextEdit->setGeometry(QRect(20, 250, 141, 31));
+        plainTextEdit->setGeometry(QRect(20, 440, 141, 31));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 674, 22));
+        menuBar->setGeometry(QRect(0, 0, 1113, 22));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
