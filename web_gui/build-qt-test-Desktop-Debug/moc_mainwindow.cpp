@@ -60,7 +60,7 @@ static const uint qt_meta_data_MainWindow[] = {
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Int,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -72,11 +72,11 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->update_img(); break;
-        case 1: { int _r = _t->socket_connect();
-            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 1: _t->socket_connect(); break;
         default: ;
         }
     }
+    Q_UNUSED(_a);
 }
 
 const QMetaObject MainWindow::staticMetaObject = {

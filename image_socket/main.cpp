@@ -121,6 +121,7 @@ int main(){
     }
     
     count = 0;
+    int is_send = 0;
     while(1) {
         if(poll(fds, MAX_CONNECT+1, -1) < 0) {
             printf("poll error !\n");
@@ -128,18 +129,19 @@ int main(){
         }
 
         if(fds[0].revents) { // 检查是否有新连接
-            if(count < MAX_CONNECT) {
-                for(i=1; i<MAX_CONNECT+1; i++) {
-                    if(fds[i].fd == -1) {
-                        fds[i].fd  = accept(srv_sock, (struct sockaddr *)&clt, (socklen_t *)&c);
-                        index = *index_buffer -1; // have some problem
-                        count++;
-                        break;
-                    }
+            for(i=1; i<MAX_CONNECT+1; i++) {
+                if(fds[i].fd == -1) {
+                    fds[i].fd  = accept(srv_sock, (struct sockaddr *)&clt, (socklen_t *)&c);
+                    index = *index_buffer -1; // have some problem
+                    break;
                 }
             }
         }
 
+        while(*index_buffer < index){
+        }
+
+        is_send = 0;  
         // 检查客户端输入
         for(i=1;i<MAX_CONNECT+1;i++){ 
             if(fds[i].revents) {
@@ -156,23 +158,22 @@ int main(){
                     break;
                 }
                 
-                while(*index_buffer < index){
-                }
-
-                // if(*index_buffer > index) {
                 memcpy(out_frame.data, &v_buffer[((index)%3)*(COL*ROW*PIXEL_SIZE)], COL*ROW*PIXEL_SIZE);
                 if(index >= 3) {
                     *index_buffer = *index_buffer - 3;
                     index = index - 3; 
                 }
-                index = index + 1;
-                // }
+                // index = index + 1;
                 
                 // printf("send to %d\n", j);
                 send(fds[i].fd, out_frame.data, COL*ROW*PIXEL_SIZE, 0);
-            
+                is_send = 1;
             }
         }
+        if(is_send) {
+            index++;
+        }
+
 
     }
     close(clt_sock); 

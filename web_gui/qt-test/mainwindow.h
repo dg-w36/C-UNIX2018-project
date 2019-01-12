@@ -14,6 +14,8 @@
 #include <QTimer>
 #include <QObject>
 
+#include "ui_mainwindow.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -27,14 +29,21 @@ public:
 //    void update_img(QImage img);
     void set_Qimage_buffer(uchar * pt);
     ~MainWindow();
+    int sock = -1;
+    uchar * v_buffer;
+    int * index_buffer;
 
 public slots :
     void update_img();
-    int socket_connect();
+    void socket_connect();
+    void record_pic();
 
 private:
     Ui::MainWindow *ui;
     uchar * tmp_img;
+    QGraphicsScene scene;
+    QImage tmp_qimage = QImage(960, 400, QImage::Format_RGB888);
+    int record_status;
 };
 
 #endif // MAINWINDOW_H

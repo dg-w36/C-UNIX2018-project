@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1083</width>
-    <height>565</height>
+    <width>1053</width>
+    <height>556</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -76,13 +76,26 @@
      <string>127.0.0.1</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>450</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1083</width>
+     <width>1053</width>
      <height>22</height>
     </rect>
    </property>
