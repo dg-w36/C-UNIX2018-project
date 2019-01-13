@@ -15,7 +15,7 @@ CXX           = g++
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../qt-test -I. -isystem /usr/include/opencv -I/home/david/anaconda3/include/qt -I/home/david/anaconda3/include/qt/QtWidgets -I/home/david/anaconda3/include/qt/QtGui -I/home/david/anaconda3/include/qt/QtCore -I. -I. -I/home/david/anaconda3/mkspecs/linux-g++
+INCPATH       = -I../qt-test -I. -I/home/david/Documents/tmp/opencv-3.4.4/build/out/include -I/home/david/anaconda3/include/qt -I/home/david/anaconda3/include/qt/QtWidgets -I/home/david/anaconda3/include/qt/QtGui -I/home/david/anaconda3/include/qt/QtCore -I. -I. -I/home/david/anaconda3/mkspecs/linux-g++
 QMAKE         = /home/david/anaconda3/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -38,7 +38,7 @@ DISTNAME      = qt-test1.0.0
 DISTDIR = /home/david/Documents/learn/PHD_course/2018-2019-year1/C-UNIX/homework/C-UNIX2018-project/web_gui/build-qt-test-Desktop-Debug/.tmp/qt-test1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/david/anaconda3/lib
-LIBS          = $(SUBLIBS) -L/usr/lib/ -lopencv_core -lopencv_highgui -lopencv_imgproc -L/home/david/anaconda3/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/home/david/Documents/tmp/opencv-3.4.4/build/out/lib -lopencv_dnn -lopencv_ml -lopencv_objdetect -lopencv_shape -lopencv_stitching -lopencv_superres -lopencv_videostab -lopencv_calib3d -lopencv_features2d -lopencv_highgui -lopencv_videoio -lopencv_imgcodecs -lopencv_video -lopencv_photo -lopencv_imgproc -lopencv_flann -lopencv_viz -lopencv_core -L/home/david/anaconda3/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -770,10 +770,72 @@ moc_mainwindow.cpp: /home/david/anaconda3/include/qt/QtWidgets/QMainWindow \
 		/home/david/anaconda3/include/qt/QtCore/qtimer.h \
 		/home/david/anaconda3/include/qt/QtCore/qbasictimer.h \
 		/home/david/anaconda3/include/qt/QtCore/QObject \
+		ui_mainwindow.h \
+		/home/david/anaconda3/include/qt/QtCore/QVariant \
+		/home/david/anaconda3/include/qt/QtWidgets/QAction \
+		/home/david/anaconda3/include/qt/QtWidgets/qaction.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qactiongroup.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QApplication \
+		/home/david/anaconda3/include/qt/QtWidgets/qapplication.h \
+		/home/david/anaconda3/include/qt/QtCore/qcoreapplication.h \
+		/home/david/anaconda3/include/qt/QtCore/qeventloop.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qdesktopwidget.h \
+		/home/david/anaconda3/include/qt/QtGui/qguiapplication.h \
+		/home/david/anaconda3/include/qt/QtGui/qinputmethod.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QButtonGroup \
+		/home/david/anaconda3/include/qt/QtWidgets/qbuttongroup.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QGraphicsView \
+		/home/david/anaconda3/include/qt/QtWidgets/qgraphicsview.h \
+		/home/david/anaconda3/include/qt/QtGui/qpainter.h \
+		/home/david/anaconda3/include/qt/QtGui/qtextoption.h \
+		/home/david/anaconda3/include/qt/QtGui/qpen.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qscrollarea.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qabstractscrollarea.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qframe.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qgraphicsscene.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QHeaderView \
+		/home/david/anaconda3/include/qt/QtWidgets/qheaderview.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qabstractitemview.h \
+		/home/david/anaconda3/include/qt/QtCore/qabstractitemmodel.h \
+		/home/david/anaconda3/include/qt/QtCore/qitemselectionmodel.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qabstractitemdelegate.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qstyleoption.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qabstractspinbox.h \
+		/home/david/anaconda3/include/qt/QtGui/qvalidator.h \
+		/home/david/anaconda3/include/qt/QtCore/qregularexpression.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qslider.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qabstractslider.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qstyle.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qtabbar.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qrubberband.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QLabel \
+		/home/david/anaconda3/include/qt/QtWidgets/qlabel.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QMenuBar \
+		/home/david/anaconda3/include/qt/QtWidgets/qmenubar.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qmenu.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QPlainTextEdit \
+		/home/david/anaconda3/include/qt/QtWidgets/qplaintextedit.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qtextedit.h \
+		/home/david/anaconda3/include/qt/QtGui/qtextdocument.h \
+		/home/david/anaconda3/include/qt/QtGui/qtextcursor.h \
+		/home/david/anaconda3/include/qt/QtGui/qtextformat.h \
+		/home/david/anaconda3/include/qt/QtGui/qabstracttextdocumentlayout.h \
+		/home/david/anaconda3/include/qt/QtGui/qtextlayout.h \
+		/home/david/anaconda3/include/qt/QtGui/qglyphrun.h \
+		/home/david/anaconda3/include/qt/QtGui/qrawfont.h \
+		/home/david/anaconda3/include/qt/QtGui/qfontdatabase.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QPushButton \
+		/home/david/anaconda3/include/qt/QtWidgets/qpushbutton.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qabstractbutton.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QStatusBar \
+		/home/david/anaconda3/include/qt/QtWidgets/qstatusbar.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QToolBar \
+		/home/david/anaconda3/include/qt/QtWidgets/qtoolbar.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QWidget \
 		../qt-test/mainwindow.h \
 		moc_predefs.h \
 		/home/david/anaconda3/bin/moc
-	/home/david/anaconda3/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/david/anaconda3/mkspecs/linux-g++ -I/home/david/Documents/learn/PHD_course/2018-2019-year1/C-UNIX/homework/C-UNIX2018-project/web_gui/qt-test -I/usr/include/opencv -I/home/david/anaconda3/include/qt -I/home/david/anaconda3/include/qt/QtWidgets -I/home/david/anaconda3/include/qt/QtGui -I/home/david/anaconda3/include/qt/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt-test/mainwindow.h -o moc_mainwindow.cpp
+	/home/david/anaconda3/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/david/anaconda3/mkspecs/linux-g++ -I/home/david/Documents/learn/PHD_course/2018-2019-year1/C-UNIX/homework/C-UNIX2018-project/web_gui/qt-test -I/home/david/Documents/tmp/opencv-3.4.4/build/out/include -I/home/david/anaconda3/include/qt -I/home/david/anaconda3/include/qt/QtWidgets -I/home/david/anaconda3/include/qt/QtGui -I/home/david/anaconda3/include/qt/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt-test/mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -902,13 +964,201 @@ main.o: ../qt-test/main.cpp ../qt-test/mainwindow.h \
 		/home/david/anaconda3/include/qt/QtCore/qtimer.h \
 		/home/david/anaconda3/include/qt/QtCore/qbasictimer.h \
 		/home/david/anaconda3/include/qt/QtCore/QObject \
+		ui_mainwindow.h \
+		/home/david/anaconda3/include/qt/QtCore/QVariant \
+		/home/david/anaconda3/include/qt/QtWidgets/QAction \
+		/home/david/anaconda3/include/qt/QtWidgets/qaction.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qactiongroup.h \
 		/home/david/anaconda3/include/qt/QtWidgets/QApplication \
 		/home/david/anaconda3/include/qt/QtWidgets/qapplication.h \
 		/home/david/anaconda3/include/qt/QtCore/qcoreapplication.h \
 		/home/david/anaconda3/include/qt/QtCore/qeventloop.h \
 		/home/david/anaconda3/include/qt/QtWidgets/qdesktopwidget.h \
 		/home/david/anaconda3/include/qt/QtGui/qguiapplication.h \
-		/home/david/anaconda3/include/qt/QtGui/qinputmethod.h
+		/home/david/anaconda3/include/qt/QtGui/qinputmethod.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QButtonGroup \
+		/home/david/anaconda3/include/qt/QtWidgets/qbuttongroup.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QGraphicsView \
+		/home/david/anaconda3/include/qt/QtWidgets/qgraphicsview.h \
+		/home/david/anaconda3/include/qt/QtGui/qpainter.h \
+		/home/david/anaconda3/include/qt/QtGui/qtextoption.h \
+		/home/david/anaconda3/include/qt/QtGui/qpen.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qscrollarea.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qabstractscrollarea.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qframe.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qgraphicsscene.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QHeaderView \
+		/home/david/anaconda3/include/qt/QtWidgets/qheaderview.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qabstractitemview.h \
+		/home/david/anaconda3/include/qt/QtCore/qabstractitemmodel.h \
+		/home/david/anaconda3/include/qt/QtCore/qitemselectionmodel.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qabstractitemdelegate.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qstyleoption.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qabstractspinbox.h \
+		/home/david/anaconda3/include/qt/QtGui/qvalidator.h \
+		/home/david/anaconda3/include/qt/QtCore/qregularexpression.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qslider.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qabstractslider.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qstyle.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qtabbar.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qrubberband.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QLabel \
+		/home/david/anaconda3/include/qt/QtWidgets/qlabel.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QMenuBar \
+		/home/david/anaconda3/include/qt/QtWidgets/qmenubar.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qmenu.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QPlainTextEdit \
+		/home/david/anaconda3/include/qt/QtWidgets/qplaintextedit.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qtextedit.h \
+		/home/david/anaconda3/include/qt/QtGui/qtextdocument.h \
+		/home/david/anaconda3/include/qt/QtGui/qtextcursor.h \
+		/home/david/anaconda3/include/qt/QtGui/qtextformat.h \
+		/home/david/anaconda3/include/qt/QtGui/qabstracttextdocumentlayout.h \
+		/home/david/anaconda3/include/qt/QtGui/qtextlayout.h \
+		/home/david/anaconda3/include/qt/QtGui/qglyphrun.h \
+		/home/david/anaconda3/include/qt/QtGui/qrawfont.h \
+		/home/david/anaconda3/include/qt/QtGui/qfontdatabase.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QPushButton \
+		/home/david/anaconda3/include/qt/QtWidgets/qpushbutton.h \
+		/home/david/anaconda3/include/qt/QtWidgets/qabstractbutton.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QStatusBar \
+		/home/david/anaconda3/include/qt/QtWidgets/qstatusbar.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QToolBar \
+		/home/david/anaconda3/include/qt/QtWidgets/qtoolbar.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QWidget \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/opencv.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/opencv_modules.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cvdef.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/hal/interface.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cv_cpu_dispatch.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cv_cpu_helper.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/fast_math.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/version.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/base.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cvstd.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/ptr.inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/neon_utils.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/vsx_utils.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/check.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/traits.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/matx.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/saturate.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/types.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/mat.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/bufferpool.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/mat.inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/persistence.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/operations.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cvstd.inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/utility.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/core_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/types_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/optim.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/ovx.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/calib3d.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/features2d.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/miniflann.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/defines.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/config.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/affine.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/calib3d/calib3d_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/dnn.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/dnn/dnn.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/dnn/dict.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/dnn/layer.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/dnn/dnn.inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/flann_base.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/general.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/matrix.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/params.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/any.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/saving.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/nn_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/result_set.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/all_indices.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/kdtree_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/dynamic_bitset.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/dist.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/heap.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/allocator.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/random.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/kdtree_single_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/kmeans_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/logger.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/composite_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/linear_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/hierarchical_clustering_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/lsh_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/lsh_table.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/autotuned_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/ground_truth.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/index_testing.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/timer.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/sampling.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/highgui.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/imgcodecs.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videoio.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/highgui/highgui_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/imgproc/imgproc_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/imgproc/types_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/imgcodecs/imgcodecs_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videoio/videoio_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/imgproc.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/ml.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/ml/ml.inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/objdetect.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/objdetect/detection_based_tracker.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/objdetect/objdetect_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/photo.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/photo/photo_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/shape.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/shape/emdL1.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/shape/shape_transformer.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/shape/hist_cost.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/shape/shape_distance.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/warpers.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/warpers.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cuda.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cuda_types.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cuda.inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/warpers_inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/matchers.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/motion_estimators.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/util.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/util_inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/camera.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/exposure_compensate.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/seam_finders.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/blenders.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/superres.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/superres/optical_flow.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/video.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/video/tracking.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/video/background_segm.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/video/tracking_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/stabilizer.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/global_motion.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/optical_flow.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/motion_core.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/outlier_rejection.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/motion_stabilizing.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/frame_source.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/log.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/inpainting.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/fast_marching.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/fast_marching_inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/deblurring.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/wobble_suppression.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/ring_buffer.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/viz.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/viz/types.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/viz/widgets.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/viz/viz3d.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/viz/vizcore.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../qt-test/main.cpp
 
 mainwindow.o: ../qt-test/mainwindow.cpp ../qt-test/mainwindow.h \
@@ -1057,6 +1307,8 @@ mainwindow.o: ../qt-test/mainwindow.cpp ../qt-test/mainwindow.h \
 		/home/david/anaconda3/include/qt/QtWidgets/qstyle.h \
 		/home/david/anaconda3/include/qt/QtWidgets/qtabbar.h \
 		/home/david/anaconda3/include/qt/QtWidgets/qrubberband.h \
+		/home/david/anaconda3/include/qt/QtWidgets/QLabel \
+		/home/david/anaconda3/include/qt/QtWidgets/qlabel.h \
 		/home/david/anaconda3/include/qt/QtWidgets/QMenuBar \
 		/home/david/anaconda3/include/qt/QtWidgets/qmenubar.h \
 		/home/david/anaconda3/include/qt/QtWidgets/qmenu.h \
@@ -1078,7 +1330,140 @@ mainwindow.o: ../qt-test/mainwindow.cpp ../qt-test/mainwindow.h \
 		/home/david/anaconda3/include/qt/QtWidgets/qstatusbar.h \
 		/home/david/anaconda3/include/qt/QtWidgets/QToolBar \
 		/home/david/anaconda3/include/qt/QtWidgets/qtoolbar.h \
-		/home/david/anaconda3/include/qt/QtWidgets/QWidget
+		/home/david/anaconda3/include/qt/QtWidgets/QWidget \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/opencv.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/opencv_modules.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cvdef.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/hal/interface.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cv_cpu_dispatch.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cv_cpu_helper.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/fast_math.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/version.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/base.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cvstd.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/ptr.inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/neon_utils.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/vsx_utils.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/check.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/traits.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/matx.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/saturate.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/types.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/mat.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/bufferpool.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/mat.inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/persistence.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/operations.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cvstd.inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/utility.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/core_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/types_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/optim.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/ovx.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/calib3d.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/features2d.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/miniflann.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/defines.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/config.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/affine.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/calib3d/calib3d_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/dnn.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/dnn/dnn.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/dnn/dict.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/dnn/layer.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/dnn/dnn.inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/flann_base.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/general.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/matrix.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/params.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/any.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/saving.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/nn_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/result_set.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/all_indices.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/kdtree_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/dynamic_bitset.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/dist.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/heap.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/allocator.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/random.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/kdtree_single_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/kmeans_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/logger.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/composite_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/linear_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/hierarchical_clustering_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/lsh_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/lsh_table.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/autotuned_index.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/ground_truth.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/index_testing.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/timer.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/flann/sampling.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/highgui.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/imgcodecs.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videoio.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/highgui/highgui_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/imgproc/imgproc_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/imgproc/types_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/imgcodecs/imgcodecs_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videoio/videoio_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/imgproc.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/ml.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/ml/ml.inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/objdetect.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/objdetect/detection_based_tracker.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/objdetect/objdetect_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/photo.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/photo/photo_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/shape.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/shape/emdL1.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/shape/shape_transformer.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/shape/hist_cost.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/shape/shape_distance.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/warpers.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/warpers.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cuda.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cuda_types.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/core/cuda.inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/warpers_inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/matchers.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/motion_estimators.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/util.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/util_inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/camera.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/exposure_compensate.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/seam_finders.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/stitching/detail/blenders.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/superres.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/superres/optical_flow.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/video.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/video/tracking.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/video/background_segm.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/video/tracking_c.h \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/stabilizer.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/global_motion.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/optical_flow.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/motion_core.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/outlier_rejection.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/motion_stabilizing.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/frame_source.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/log.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/inpainting.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/fast_marching.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/fast_marching_inl.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/deblurring.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/wobble_suppression.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/videostab/ring_buffer.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/viz.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/viz/types.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/viz/widgets.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/viz/viz3d.hpp \
+		/home/david/Documents/tmp/opencv-3.4.4/build/out/include/opencv2/viz/vizcore.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../qt-test/mainwindow.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 

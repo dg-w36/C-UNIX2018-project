@@ -5,6 +5,7 @@
 using namespace cv;
 
 int start_socket(QString data, uchar * v_buffer, int * index_buffer);
+void start_record_proc(int fd[2], uchar * v_buffer, int * index_buffer);
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -103,11 +104,85 @@ int start_socket(QString data, uchar * v_buffer, int * index_buffer) {
 }
 
 void MainWindow::record_pic() {
+
     if(record_status == 0){
         record_status = 1;
+        ui->record->setText("stop record");
+        pipe(pipe_fd);
+
+        ui->record->update();
+        start_record_proc(pipe_fd, v_buffer, index_buffer);
+        write(pipe_fd[1], "01", 2);
     }
     else{
         record_status = 0;
+        ui->record->setText("start record");
+        ui->record->update();
+        write(pipe_fd[1], "10", 2);
+
         // stop signal
+    }
+}
+
+void start_record_proc(int fd[2], uchar * v_buffer, int * index_buffer) {
+    if(fork() == 0) {
+        VideoWriter video("outcpp.avi",CV_FOURCC('M','J','P','G'),10, Size(1920,800));
+        int n = 0;
+        char buf[100];
+        close(fd[1]);
+        int recording = -1;
+        int record_index = (*index_buffer) > 1 ? (*index_buffer - 2):(*index_buffer);
+        Mat frame_buf(800,1920, CV_8UC3);
+
+        while(1) {
+            n = read(fd[0], buf, 10);
+            if(n != -1) {
+                buf[n] = '\0';
+            }
+
+            if(n > 0) { // have signal
+                if(strcmp(buf, "10")) { //start signal
+                    qDebug("start record!\n");
+                    recording = 1;
+                }
+                else if(strcmp(buf, "01")) { // stop signal
+                    qDebug("stop record!\n");
+                    recording = 0;
+                }
+            }
+
+            if(recording == 1) {
+                qDebug("recording is %d\n", *index_buffer);
+                if(record_index < (*index_buffer)) {
+                    memcpy(frame_buf.data, &v_buffer[(record_index%3)*(800*1920*3)], 800*1920*3);
+                    video.write(frame_buf);
+
+                    record_index = record_index + 1;
+
+                    qDebug("add new frame\n");
+
+                    if(record_index > 3) {
+                        record_index %= 3;
+                    }
+                }
+            }
+            else if(recording == 0) {
+
+                qDebug("video file close\n");
+                video.release();
+
+//                imshow("debug", frame_buf);
+//                waitKey();
+
+                recording = -1;
+//                exit(0);
+//                return;
+            }
+
+//            usleep(100000);
+        }
+    }
+    else{
+        close(fd[0]);
     }
 }

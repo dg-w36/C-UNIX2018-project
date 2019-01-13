@@ -40,10 +40,16 @@ public slots :
 
 private:
     Ui::MainWindow *ui;
+
+    // image update
     uchar * tmp_img;
     QGraphicsScene scene;
     QImage tmp_qimage = QImage(960, 400, QImage::Format_RGB888);
+
+    // image capture
     int record_status;
+    char * fn = "/tmp/pipefifo";
+
 };
 
 #endif // MAINWINDOW_H
