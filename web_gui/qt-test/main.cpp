@@ -29,6 +29,9 @@ int main(int argc, char *argv[])
     int index = (*index_buffer) == 0 ? (*index_buffer):(*index_buffer)-1;
     Mat tmp_img(800,1920, CV_8UC3);
     uchar * out = (uchar *)mmap(NULL, 400*960*3, PROT_READ|PROT_WRITE,MAP_SHARED|MAP_ANONYMOUS,-1,0);
+    int * color_mode = (int *)mmap(NULL, sizeof(int), PROT_READ|PROT_WRITE,MAP_SHARED|MAP_ANONYMOUS,-1,0);
+    w.color_mode = color_mode;
+    *color_mode = 1; // initial is color mode
 
     w.set_Qimage_buffer(out);
 
@@ -42,20 +45,36 @@ int main(int argc, char *argv[])
     int proc2 = fork();
     if(proc2 == 0) {
         Mat output_img(400,960, CV_8UC3);
+        Mat gray_img(400,960, CV_8UC1);
         while(1) {
             if(*index_buffer > index) {
 //                memcpy(tmp_img.data, &v_buffer[(index%3)*(COL*ROW*PIXEL_SIZE)], COL*ROW*PIXEL_SIZE);
                 tmp_img.data = &v_buffer[(index%3)*(COL*ROW*PIXEL_SIZE)];
                 resize(tmp_img, output_img, output_img.size());
-                cvtColor(output_img, output_img, CV_RGB2BGR);
+
+                if(*color_mode) {
+                    cvtColor(output_img, output_img, CV_RGB2BGR);
+                }
+                else {
+                    cvtColor(output_img, gray_img, CV_RGB2GRAY);
+                }
 
                 index++;
                 if(index >= 3) {
                     index = index % 3;
-                    (*index_buffer) = (*index_buffer) % 3;
+                    *index_buffer = (*index_buffer) % 3;
                 }
 
-                memcpy(out, output_img.data, 400*960*3);
+                if(*color_mode) {
+//                    qDebug("in color mode\n");
+                    memcpy(out, output_img.data, 400*960*3);
+                }
+                else {
+//                    qDebug("in gray mode\n");
+                    memcpy(out, gray_img.data, 400*960);
+//                    memcpy(out+400*960, gray_img.data, 400*960);
+//                    memcpy(out+400*960*2, gray_img.data, 400*960);
+                }
             }
             usleep(16667);
         }

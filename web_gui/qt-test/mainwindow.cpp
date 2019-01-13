@@ -12,11 +12,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // function of button
     QObject::connect(ui->connect_socket, SIGNAL(clicked()), this, SLOT(socket_connect()));
     QObject::connect(ui->record, SIGNAL(clicked()), this, SLOT(record_pic()));
+    QObject::connect(ui->do_process, SIGNAL(clicked()), this, SLOT(change_colormode()));
 
-    ui->image->setScene(&scene);
-    ui->image->show();
+    // change color mode
+    if(color_mode) {
+        ui->image->setScene(&scene_color);
+        ui->image->show();
+    }
+    else {
+        ui->image->setScene(&scene_gray);
+        ui->image->show();
+    }
 
     record_status = 0;
 }
@@ -28,10 +38,21 @@ MainWindow::~MainWindow()
 
 
 void MainWindow::update_img() {
-    memcpy(tmp_qimage.bits(), tmp_img, 960*400*3);
-    scene.addPixmap(QPixmap::fromImage(tmp_qimage));
-    ui->image->setScene(&scene);
-    ui->image->resize(tmp_qimage.width() + 5, tmp_qimage.height() + 5);
+
+    if(*color_mode) {
+        memcpy(tmp_qimage1.bits(), tmp_img, 960*400*3);
+        scene_color.addPixmap(QPixmap::fromImage(tmp_qimage1));
+        ui->image->setScene(&scene_color);
+        ui->image->resize(tmp_qimage1.width() + 5, tmp_qimage1.height() + 5);
+    }
+    else {
+        QImage tmp_qimage = QImage(tmp_img, 960, 400, 960*1, QImage::Format_Grayscale8);
+//        memcpy(tmp_qimage2.bits(), tmp_img, 960*400);
+        scene_gray.addPixmap(QPixmap::fromImage(tmp_qimage));
+        ui->image->setScene(&scene_gray);
+        ui->image->resize(tmp_qimage.width() + 5, tmp_qimage.height() + 5);
+    }
+
     ui->image->show();
 }
 
@@ -108,7 +129,11 @@ void MainWindow::record_pic() {
     if(record_status == 0){
         record_status = 1;
         ui->record->setText("stop record");
-        pipe(pipe_fd);
+//        pipe(pipe_fd);
+        mkfifo(fn, S_IRUSR | S_IWUSR);
+
+        pipe_fd[0] = open (fn, O_RDONLY | O_NONBLOCK);
+        pipe_fd[1] = open (fn, O_WRONLY | O_NONBLOCK, S_IRWXU);
 
         ui->record->update();
         start_record_proc(pipe_fd, v_buffer, index_buffer);
@@ -124,14 +149,16 @@ void MainWindow::record_pic() {
     }
 }
 
-void start_record_proc(int fd[2], uchar * v_buffer, int * index_buffer) {
+void start_record_proc(int fd[], uchar * v_buffer, int * index_buffer) {
     if(fork() == 0) {
-        VideoWriter video("outcpp.avi",CV_FOURCC('M','J','P','G'),10, Size(1920,800));
+
+        VideoWriter video("outcpp.mp4",CV_FOURCC('M','P','4','V'),30, Size(1920,800));
         int n = 0;
         char buf[100];
         close(fd[1]);
         int recording = -1;
-        int record_index = (*index_buffer) > 1 ? (*index_buffer - 2):(*index_buffer);
+        int record_index_pre = (*index_buffer) > 1 ? (*index_buffer - 2):(*index_buffer);
+        int record_index;
         Mat frame_buf(800,1920, CV_8UC3);
 
         while(1) {
@@ -152,37 +179,55 @@ void start_record_proc(int fd[2], uchar * v_buffer, int * index_buffer) {
             }
 
             if(recording == 1) {
-                qDebug("recording is %d\n", *index_buffer);
-                if(record_index < (*index_buffer)) {
-                    memcpy(frame_buf.data, &v_buffer[(record_index%3)*(800*1920*3)], 800*1920*3);
-                    video.write(frame_buf);
-
-                    record_index = record_index + 1;
-
-                    qDebug("add new frame\n");
-
-                    if(record_index > 3) {
-                        record_index %= 3;
-                    }
+//                qDebug("recording is %d\n", *index_buffer);
+                if(*index_buffer > 1) {
+                    record_index = (*index_buffer) - 2;
                 }
+                else if(*index_buffer == 1) {
+                    record_index = 2;
+                }
+                else {
+                    record_index = 1;
+                }
+
+                if(record_index_pre == record_index) {
+                    continue;
+                }
+                else {
+                    record_index_pre = record_index;
+                }
+                memcpy(frame_buf.data, &v_buffer[(record_index%3)*(800*1920*3)], 800*1920*3);
+                video.write(frame_buf);
+
+                record_index = record_index + 1;
+
+//                qDebug("add new frame\n");
             }
             else if(recording == 0) {
 
                 qDebug("video file close\n");
                 video.release();
 
-//                imshow("debug", frame_buf);
-//                waitKey();
-
                 recording = -1;
 //                exit(0);
-//                return;
             }
 
-//            usleep(100000);
+            usleep(10000);
         }
     }
     else{
         close(fd[0]);
+    }
+}
+
+void MainWindow::change_colormode() {
+    *color_mode = !(*color_mode);
+    if(*color_mode) {
+        ui->do_process->setText("change to gray");
+        qDebug("Change to color mode\n");
+    }
+    else{
+        ui->do_process->setText("change to color");
+        qDebug("change to gray mode\n");
     }
 }

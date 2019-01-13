@@ -9,6 +9,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/mman.h>
+#include <sys/stat.h>
 
 #include <QMainWindow>
 #include <QTimer>
@@ -32,23 +33,30 @@ public:
     int sock = -1;
     uchar * v_buffer;
     int * index_buffer;
+    int *color_mode ;
 
 public slots :
     void update_img();
     void socket_connect();
     void record_pic();
+    void change_colormode();
 
 private:
     Ui::MainWindow *ui;
 
     // image update
     uchar * tmp_img;
-    QGraphicsScene scene;
-    QImage tmp_qimage = QImage(960, 400, QImage::Format_RGB888);
+    QGraphicsScene scene_color;
+    QGraphicsScene scene_gray;
+    QImage tmp_qimage1 = QImage(960, 400, QImage::Format_RGB888);
+    QImage tmp_qimage2 = QImage(960, 400, QImage::Format_Grayscale8);
+
 
     // image capture
     int record_status;
     char * fn = "/tmp/pipefifo";
+    int pipe_fd[2];
+
 
 };
 
