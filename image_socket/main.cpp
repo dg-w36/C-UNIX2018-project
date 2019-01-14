@@ -53,45 +53,6 @@ int main(){
 
     Mat out_frame(ROW,COL,CV_8UC3);
     int index = 0;
-    // while(1) {
-    //     if(*index_buffer > index) {
-    //         memcpy(out_frame.data, &v_buffer[((index)%3)*(COL*ROW*PIXEL_SIZE)], COL*ROW*PIXEL_SIZE);
-    //         if(index >= 3) {
-    //             *index_buffer = *index_buffer - 3;
-    //             index = index - 3; 
-    //         }
-    //         index = index + 1;
-    //     }
-
-    //     imshow("video", out_frame);
-    //     if(waitKey(10)  == 27){
-    //         break;
-    //     }
-    // }
-
-    // check the channal format of the frame 
-    // result is rgbrgbrgbrgb...
-    // memcpy(buffer, frame.data, COL*ROW*PIXEL_SIZE);
-    // for(int i=0;i<COL*ROW;i++) {
-    //     r_buffer[i] = buffer[i][0];
-    // }
-    // Mat out_frame1(ROW, COL, CV_8UC1, r_buffer);
-    // imshow("test1", out_frame1);
-    // waitKey();
-
-    // for(int i=0;i<COL*ROW;i++) {
-    //     r_buffer[i] = buffer[i][1];
-    // }    
-    // Mat out_frame2(ROW, COL, CV_8UC1, r_buffer);
-    // imshow("test2", out_frame2);
-    // waitKey();
-   
-    // for(int i=0;i<COL*ROW;i++) {
-    //     r_buffer[i] = buffer[i][0];
-    // }
-    // Mat out_frame3(ROW, COL, CV_8UC1, r_buffer);
-    // imshow("test3", out_frame3);
-    // waitKey();
 
     int srv_sock, clt_sock, c, read_size, i,j,count;
     struct sockaddr_in srv, clt;
@@ -106,7 +67,7 @@ int main(){
     srv.sin_port = htons(18888);
     // 监听 18888 端口
     // 绑定套接字
-    bind(srv_sock, (struct sockaddr *)&srv, sizeof(srv)); // 为什么要强制类型转换?
+    bind(srv_sock, (struct sockaddr *)&srv, sizeof(srv)); 
     listen(srv_sock, 3);
     // 接受客户端连接
     c = sizeof(struct sockaddr_in);
@@ -140,7 +101,7 @@ int main(){
         is_send = 0;  
         // 检查客户端输入
         for(i=1;i<MAX_CONNECT+1;i++){ 
-            if(fds[i].revents) {
+            if(fds[i].revents) { // 检查是否有客户端输入,目前协议简单,然和信息都视为画面申请
                 read_size = recv(fds[i].fd, buf, sizeof(buf), 0); // 接收
                 buf[read_size] = '\0';
 
@@ -154,9 +115,10 @@ int main(){
                     break;
                 }
                 
-                while(*index_buffer < index){ }
+                while(*index_buffer < index){ } // 这里类似与fifo的两个指针,跳出循环表示有新的帧被缓存了
                 
-                memcpy(out_frame.data, &v_buffer[((index)%3)*(COL*ROW*PIXEL_SIZE)], COL*ROW*PIXEL_SIZE);
+                memcpy(out_frame.data, &v_buffer[((index)%3)*(COL*ROW*PIXEL_SIZE)], COL*ROW*PIXEL_SIZE); 
+                // 从fifo中取出数据,准备发送
                 if(index >= 3) {
                     *index_buffer = *index_buffer - 3;
                     index = index - 3; 
