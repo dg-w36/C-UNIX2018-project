@@ -127,7 +127,6 @@ int main(){
             printf("poll error !\n");
             break;
         }
-
         if(fds[0].revents) { // 检查是否有新连接
             for(i=1; i<MAX_CONNECT+1; i++) {
                 if(fds[i].fd == -1) {
@@ -136,9 +135,6 @@ int main(){
                     break;
                 }
             }
-        }
-
-        while(*index_buffer < index){
         }
 
         is_send = 0;  
@@ -157,6 +153,8 @@ int main(){
                     perror("recv failed");
                     break;
                 }
+                
+                while(*index_buffer < index){ }
                 
                 memcpy(out_frame.data, &v_buffer[((index)%3)*(COL*ROW*PIXEL_SIZE)], COL*ROW*PIXEL_SIZE);
                 if(index >= 3) {
