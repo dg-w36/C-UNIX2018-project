@@ -45,12 +45,11 @@ void MainWindow::update_img() {
         ui->image->setScene(&scene_color);
         ui->image->resize(tmp_qimage1.width() + 5, tmp_qimage1.height() + 5);
     }
-    else {
-        QImage tmp_qimage = QImage(tmp_img, 960, 400, 960*1, QImage::Format_Grayscale8);
-//        memcpy(tmp_qimage2.bits(), tmp_img, 960*400);
-        scene_gray.addPixmap(QPixmap::fromImage(tmp_qimage));
+    else {}
+       memcpy(tmp_qimage2.bits(), tmp_img, 960*400);
+        scene_gray.addPixmap(QPixmap::fromImage(tmp_qimage2));
         ui->image->setScene(&scene_gray);
-        ui->image->resize(tmp_qimage.width() + 5, tmp_qimage.height() + 5);
+        ui->image->resize(tmp_qimage2.width() + 5, tmp_qimage2.height() + 5);
     }
 
     ui->image->show();
@@ -63,7 +62,7 @@ void MainWindow::set_Qimage_buffer(uchar * pt) {
 void MainWindow::socket_connect() {
     QString data = ui->server_ip->toPlainText();
 
-    if(sock == -1) {
+    if(sock == -1) { // 只有未连接状态才能执行连接
         sock = start_socket(data, v_buffer, index_buffer);
     }
 }
@@ -86,7 +85,7 @@ int start_socket(QString data, uchar * v_buffer, int * index_buffer) {
         return -1;
     }
     else {
-        send(sock, "start", 5, 0);
+        send(sock, "start", 5, 0); // 发送请求,要求数据发送
         int proc1 = fork();
         if(proc1 == 0) { // subprocess 1 to recv image and cache it
             struct pollfd pofd;
@@ -95,7 +94,7 @@ int start_socket(QString data, uchar * v_buffer, int * index_buffer) {
             Mat recv_mat(800, 1920, CV_8UC3);
             int len,total;
 
-            while(1) {
+            while(1) { // 通过多路复用,监测数据并缓存到共享内存
                 if(poll(&pofd, 1, -1) < 0) {
                     printf("poll error !\n");
                 }
@@ -124,12 +123,13 @@ int start_socket(QString data, uchar * v_buffer, int * index_buffer) {
 
 }
 
-void MainWindow::record_pic() {
+void MainWindow::record_pic() { //按键控制视频存储的状态
 
     if(record_status == 0){
         record_status = 1;
         ui->record->setText("stop record");
 //        pipe(pipe_fd);
+        //　这里需要用到非阻塞的读取数据，因此使用了命名管道
         mkfifo(fn, S_IRUSR | S_IWUSR);
 
         pipe_fd[0] = open (fn, O_RDONLY | O_NONBLOCK);
@@ -150,8 +150,8 @@ void MainWindow::record_pic() {
 }
 
 void start_record_proc(int fd[], uchar * v_buffer, int * index_buffer) {
-    if(fork() == 0) {
-
+    if(fork() == 0) {　// 视频存储进程
+　
         VideoWriter video("outcpp.mp4",CV_FOURCC('M','P','4','V'),30, Size(1920,800));
         int n = 0;
         char buf[100];

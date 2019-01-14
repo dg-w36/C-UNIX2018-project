@@ -49,7 +49,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         image = new QGraphicsView(centralWidget);
         image->setObjectName(QStringLiteral("image"));
-        image->setGeometry(QRect(20, 10, 980, 420));
+        image->setGeometry(QRect(0, 40, 980, 420));
         connect_socket = new QPushButton(centralWidget);
         connect_socket->setObjectName(QStringLiteral("connect_socket"));
         connect_socket->setGeometry(QRect(170, 440, 91, 31));
